@@ -76,3 +76,34 @@ public:
         return ans;
     }
 };
+
+
+//or
+
+
+class Solution {
+public:
+    map<int, vector<int>> levelNode;
+    void dfs(TreeNode* root, int depth) {
+        if(root) {
+            levelNode[depth].push_back(root->val);
+            dfs(root->left, depth+1);
+            dfs(root->right, depth+1);
+        }
+    }
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        if(!root) return {};
+        levelNode.clear();
+        dfs(root, 0);
+        vector<vector<int>> res;
+        int depth = 0;
+        for(auto p : levelNode) {
+            if(depth & 1) {
+                reverse(p.second.begin(), p.second.end());
+            }
+            res.push_back(p.second);
+            depth++;
+        }
+        return res;
+    }
+};
