@@ -23,8 +23,30 @@ Output: 0
 
 class Solution {
 public:
+    
     int findMin(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
-        return nums[0];
+        int l,r,n,mid,j,i;
+        n=nums.size();
+        l=0;
+        r=n-1;
+       
+        while(l<r)
+        {
+            mid=(l+r)/2;
+            if(nums[mid]==nums[r])
+            {
+                r--;
+            }
+            else if(nums[mid]>nums[r])
+            {
+                l=mid+1;
+            }
+            else
+            {
+                r=mid;
+            }
+        }
+        
+        return nums[r];
     }
 };
